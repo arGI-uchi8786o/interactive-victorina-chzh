@@ -62,7 +62,7 @@ def roundthree():
           ctypes.windll.user32.BlockInput(False)
           sys.exit(1)
           pass
-     question4 = simpledialog.askstring("Можно ли провести DDoS-Атаку на сервер используя ботнет из устройств, закрепленных на крокодилах?")
+     question4 = simpledialog.askstring("Вопрос4", "Можно ли провести DDoS-Атаку на сервер используя ботнет из устройств, закрепленных на крокодилах?")
      if question4 == "Да".lower() or question4 == "да.".lower():
           play_sound(youwin8bit)
           os.system("python mega_fireworks.py")
@@ -215,6 +215,7 @@ if __name__ == "__main__":
 
    
         
+
 
 
 
