@@ -29,7 +29,7 @@ def roundthree():
      if question1 == "Россия".lower():
           play_sound(youwin8bit)
           messagebox.showinfo("А ты крут.послушаем гимн россии!")
-          playsound(russian_gimn)
+          play_sound(russian_gimn)
           pass
      elif question1 == "рф":
           play_sound(youwin8bit)
@@ -215,6 +215,7 @@ if __name__ == "__main__":
 
    
         
+
 
 
 
