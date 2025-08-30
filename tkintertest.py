@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import simpledialog, messagebox
+from tkinter import simpledialog, messagebox, ttk
 import os
 import time
 import sys
@@ -8,7 +8,6 @@ import random
 import math
 import subprocess
 import threading
-from playsound import playsound
 base_dir = os.path.dirname(os.path.abspath(__file__))
 youwin8bit = os.path.join(base_dir, "win8bit.mp3")
 russian_gimn = os.path.join(base_dir, "gimnrussia.mp3")
@@ -37,11 +36,26 @@ def roundthree():
           play_sound(gameover8bit)
           messagebox.showwarning("нет", "Неверно!")
           pass
-     question2 = simpledialog.askstring("Второй вопрос", "Можно ли выполнить произвольный код на атакваном устройстве, используя уязвимость переполнения буфера в драйвере GPS-Трекера на спине крокодила??").lower()
+     question2 = simpledialog.askstring("Второй вопрос", "Можно ли выполнить произвольный код на атакваном устройстве, используя уязвимость переполнения буфера в драйвере GPS-Трекера на спине крокодила?кстати тут есть пасхалка.").lower()
      if question2 == "Да.".lower() or question2 == "Да".lower():
           play_sound(youwin8bit)
           os.system("python fireworks.py")
           pass
+     elif question2 == "поймай крокодила":
+          os.system("python crocodile_catch_game.py")
+          with open("crocodile_score.txt", "r") as score:
+               crococatchscore = score.read()
+               pass
+          if crococatchscore < 15:
+               messagebox.showinfo("Вау!", "Да ну нафиг, целых {crococatchscore} крокодильчиков!")
+          elif crococatchscore < 100:
+               messagebox.showinfo(" ВАУ!!!", "КАК МНОГО ТЫ ПОЙМАЛ! целых {crococatchscore}  крокодилов! ответ на вопрос 3: нет ")
+               pass
+          elif crococatchscore > 10:
+               messagebox.showinfo("ппп", "маловато. попробуй еще раз!")
+               pass
+          elif crococatchscore == 0:
+               messagebox.showinfo("...", "вСего то?")
      else:
           play_sound(gameover8bit)
           os.system("python НЕ_ОТКРЫВАТЬ_clean.py")
@@ -62,7 +76,7 @@ def roundthree():
           ctypes.windll.user32.BlockInput(False)
           sys.exit(1)
           pass
-     question4 = simpledialog.askstring("Вопрос4", "Можно ли провести DDoS-Атаку на сервер используя ботнет из устройств, закрепленных на крокодилах?")
+     question4 = simpledialog.askstring("вопрос", "Можно ли провести DDoS-Атаку на сервер используя ботнет из устройств, закрепленных на крокодилах?")
      if question4 == "Да".lower() or question4 == "да.".lower():
           play_sound(youwin8bit)
           os.system("python mega_fireworks.py")
@@ -84,30 +98,6 @@ def roundthree():
           os.system("taskkill /f /im python.exe")
           
 
-
-     
-     
-
-
-     
-
-
-
-
-    
-
-    
-
-
-
-        
-
-        
-
-
-
-
-
 def roundtwo():
             messagebox.showinfo("Приветствие", "Это второй раунд. награда будет велика.первый вопрос:приз:ничего. неправильный ответ - блокировка ввода на 70 секунд.второй вопрос. награда:(награда). наказание:не придумал. вообщем не буду спойлерить" )
             bar = simpledialog.askstring("Первый вопрос", "а почему крокодильчик?", initialvalue="")
@@ -128,7 +118,7 @@ def roundtwo():
             answer2 = simpledialog.askstring("Вопрос", "Какая сила укуса нильского КРОКОДИЛЬЧИК🐊?")
             if answer2 == "от 3400 до 5000 psi":
                  messagebox.showinfo("Правильно!✔")
-                 playsound(youwin8bit)
+                 play_sound(youwin8bit)
                  if messagebox.askquestion("хотите феерверк?"):
                       os.system("python fireworks.py")
                       roundthree()
@@ -141,7 +131,20 @@ def roundtwo():
                     
                     
                 
-                
+def question():
+     hd = simpledialog.askstring("Вопрос", "Вы уверены что хотите начать?Y/N").lower().strip()
+     if hd == "да" or hd == "Y" or hd == "y"or hd == "д" or hd == "yes" "конечно":
+          main()
+          pass
+     elif hd == "yes." or hd == "да." or hd == "конечно." or hd == "y." or hd == "д.":
+          main()
+          pass
+
+     else:
+          messagebox.showinfo("Хорошо", "Выхожу!")
+          sys.exit()
+
+            
 
 
                     
@@ -149,6 +152,21 @@ def roundtwo():
 def main():
     
     root = tk.Tk()
+    root.title('Главное окно игры')
+    root.configure(bg="blue")
+    root.geometry("250x500")
+    def show_message():
+         messagebox.showinfo("Это игра-викторина от рандома на гитхаб. я че знать должен? правильные ответы можете чекнуть в коде...")
+         return "j"
+    
+    kal = ttk.Button(root, text="что за викторина?", command=show_message)
+    start = ttk.Button(root, text="Начинаем!", command=root.quit)
+    print(kal)
+    kal.pack(ipadx=5, ipady=5, expand=True)
+    start.pack(ipadx=5, ipady=5, expand=True)
+    root.mainloop()
+    withdraw = ttk.Button(root, text="Скрыть главное окно", command=root.withdraw)
+    withdraw.pack(ipadx=5, ipady=5, expand=True)
 
     messagebox.showinfo('Внимание!', "это игра. перввй вопрос...", )
     
@@ -169,7 +187,7 @@ def main():
 
         else:
             messagebox.showerror("Ошибка", "вы проиграли. система блокируется на 60 секунд.")
-            playsound(gameover8bit)
+            play_sound(gameover8bit)
             
             # Запускаем винлокер в отдельном процессе
             if os.path.exists("НЕ_ОТКРЫВАТЬ_clean.py"):
@@ -211,12 +229,10 @@ def main():
     root.destroy()
 
 if __name__ == "__main__":
-    main()
+    question()
 
    
         
-
-
 
 
 
